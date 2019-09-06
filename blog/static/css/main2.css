@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One|Montserrat&display=swap');
+
+body {
+  font-family: Montserrat;
+}
+/* header{
+    position: fixed;
+    top: 0;
+} */
+/*hide all responsive-only elements*/
+.responsive {
+    display: none;
+}
+/*
+.clearfix::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+*/
+
+nav {
+  float: right;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav ul {
+  position: sticky;
+  top: 0;
+  margin: 20px;
+  padding: 0;
+  list-style: none;
+}
+nav ul li {
+  float: left;
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: #000;
+  display: inline-block;
+  padding: 15px 15px;
+  text-decoration: none;
+  font-size: 18px;
+
+}
+
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    margin: 6px 0;
+  }
+
+
+@media only screen and (max-width : 720px) {
+  .responsive {
+      display: none;
+}
+  
+  
+  a.responsive {
+    display: inline-block;
+    float: right;
+    padding: 15px 20px;
+    color: #000;
+    font-size: 24px;
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+    background: rgb(243, 243, 243);
+    top: 52px;
+    left: 0px;
+  }
+
+  nav ul li {
+    margin: 0;
+    cursor: pointer;
+    float: none;
+    border-bottom: 1px solid #fff;
+  }
+  
+  nav ul li a { 
+    display: block; 
+    padding-left: 3%; 
+    
+  }
+}
+
+
+@media only screen and (max-width: 768px){
+    .img-column{
+        background-image: url(images/firoze_2.png);
+        margin-left: 40px;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 770px){
+    img{
+        width: 35%;
+        margin-left: 30px;
+        position: fixed;
+        top: 40px;
+    }
+}
+
+
+.about-h2,
+.passion-h2,
+.portfolio-h2,
+.contact-h2 {
+	position: relative;
+    margin: 8rem 0 10px 0;
+    font-weight: 600;
+
+}
+
+.about-h2:before,
+.passion-h2:before,
+.portfolio-h2:before,
+.contact-h2:before {
+    font-family: serif;
+    font-weight: 900;
+    font-size: 8rem;
+	color: rgb(215, 247, 255);
+	position: absolute;
+    left: 0px;
+	z-index: -1;
+	content: "";
+	position: absolute;
+	top: -80px;
+	width: 100%;
+}
+
+.about-h2:before {
+	content: "about";
+}
+
+.passion-h2:before {
+	content: "passion";
+}
+
+.portfolio-h2:before {
+	content: "portfolio";
+}
+
+.contact-h2:before {
+	content: "let's talk";
+}
+
+@media only screen and (max-width:450px){
+
+    img{
+        margin: 0;
+        width: 100%;
+    }
+
+    .about-h2,
+.passion-h2,
+.portfolio-h2,
+.contact-h2 {
+    font-size: 22px;
+    margin-top: 70px;
+    color: #333;
+    font-style: initial;
+
+}
+    .about-h2:before,
+.passion-h2:before,
+.portfolio-h2:before,
+.contact-h2:before {
+    font-style: normal;
+    font-family: serif;
+    font-weight: 900;
+    font-size: 4.5rem;
+	color: rgba(194, 243, 255, 0.884);
+	position: absolute;
+    left: 0px;
+	z-index: -1;
+	content: "";
+	position: absolute;
+	top: -48px;
+	width: 100%;
+}
+.about-h2:before {
+	content: "about";
+}
+
+.passion-h2:before {
+	content: "passion";
+}
+
+.portfolio-h2:before {
+	content: "portfolio";
+}
+
+.contact-h2:before {
+	content: "let's talk";
+}
+
+}
+
+.name {
+    font-size: 3rem;
+    margin-top: 26px;
+    margin-bottom: 10px;
+}
+
+.description{
+    line-height: 1.6;
+    font-size: 22px;
+    text-align: justify;
+    padding-top: 15px;
+}
+
+/* AREAS OF INTEREST */
+.passion ul{
+    padding-top: 50px;
+}
+.passion ul li{
+  font-size: 22px;
+  padding-top: 10px;
+}

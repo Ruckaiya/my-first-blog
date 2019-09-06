@@ -1,18 +1,60 @@
-from django.conf import settings
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 
-class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+# Create your models here.
+class author(models.Model):
+    name = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_picture = models.FileField()
+    details = models.TextField()
+
+    def __str__(self):
+        return self.name.username
+
+
+class category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class tag(models.Model):
+    tags = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.tags
+
+
+class article(models.Model):
+    article_author = models.ForeignKey(author, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
+    overview = models.TextField()
+    timestamp = models.CharField(max_length=20)
+    reading_time = models.CharField(max_length=20)
+    body = models.TextField()
+    image = models.FileField()
+    posted_on = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True, auto_now_add=False)
+    category = models.ForeignKey(category, on_delete=models.CASCADE)
+    tag = models.ManyToManyField(tag)
 
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
 
     def __str__(self):
         return self.title
+
+    def get_single_url(self):
+        return reverse('blog:single_post', kwargs={"id": self.id})
+
+    def get_author_url(self):
+        return reverse('blog:author', kwargs={"name": self.article_author.name.username})
+
+
+class comment(models.Model):
+    post = models.ForeignKey(article, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=200)
+    post_comment = models.TextField()
+
+    def __str__(self):
+        return self.post.title

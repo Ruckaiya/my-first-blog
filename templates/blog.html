@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    {% load static %}
+    <link rel="stylesheet" href=" {% static 'css/blog.css' %} ">
+	
+
+    <title>Blog | Firoze Alam</title>
+</head>
+<body>
+    <nav class="menu">
+        <a href="#" class="toggle-nav">&#9776;</a>
+        <ul class="nav-item">
+            <li><a href="">Blog</a></li>
+            <li><a href="">Projects</a></li>
+            <li><a href="{% url 'blog:index' %}">About</a></li>
+        </ul>
+        <div class="social">
+            <ul>
+                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                <li><a href=""><i class="fab fa-youtube"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="post-slider">
+        <h1 class="slider-title fancy"><span>LATEST ARTICLES</span></h1>
+        <i class="fas fa-chevron-left prev"></i>
+        <i class="fas fa-chevron-right next"></i>
+        <div class="post-wrapper">
+
+        {% for latest in post %}
+        <div class="post">
+            <div><img src="{{latest.image.url}}" alt="" class="slider-image"></div>
+            <div class="post-info">
+                <h4><a href="{{ latest.get_single_url }}">{{latest.title}}</a> <br>
+                <br><i class="far fa-calendar" > {{latest.timestamp}}</i>
+                </h4>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="page-wrapper">   
+    <div class="content clearfix">
+        <div class="main-content">
+            {% for p in post %}
+            <div class="wrapper">
+                <div class="box a">
+                    <h1><a href="{{ p.get_single_url }}">{{ p.title }}</a></h1>
+                    <p>{{p.overview}}</p>
+                    <div class="line"></div>
+                    <div>In &nbsp; <a href="{% url 'blog:topic' name=p.category.name %}" style="font-weight: bold; color:#222;">{{ p.category.name }}</a> &nbsp;&nbsp; on &nbsp;{{p.timestamp}}  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; | &nbsp;&nbsp; . {{p.reading_time}} read<br>
+                    </div>
+                </div>
+                <div class="box f">
+                    <a href="{{ p.get_single_url }}"><img src="{{ p.image.url }}" alt="Image" class="img-responsive"></a>
+                </div>
+            </div>
+            {% endfor %}
+    
+            <div class="pagination">
+                <span class="step-links">
+                    {% if post.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ post.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ post.number }} of {{ post.paginator.num_pages }}.
+                    </span>
+            
+                    {% if post.has_next %}
+                        <a href="?page={{ post.next_page_number }}">next</a>
+                        <a href="?page={{ post.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    
+        <div class="sidebar">
+        <section class=" section recent-posts-container">
+            <h3 class="subtitle fancy"><span>Older Posts</span></h3>
+            {% for old in post %}
+            <article class="recent-post">
+              <img class="recent-card-img" src="{{old.image.url}}" alt="">
+              <div class="recent-posts-info">
+                <time class="article-date" datetime="2015-06-14"> {{old.timestamp}} <br>
+                </time> <a href="{{ p.get_single_url }}" class="recent-posts-link">{{old.title}}</a>
+              </div>
+            </article>
+            {% endfor %}
+        </section>
+    
+      <div class="section search">
+        <form class="search-form">
+            <span class="search-text">find more</span>
+            <input type="text" class="search-box" placeholder="Search the blog....." required>
+            <button type="submit" class="button">
+                <span class="search-row">send</span>
+            </button>
+        </form>
+    </div>
+            <div class="section topics">
+                <h3 class="subtitle fancy"><span>Categories</span></h3>
+                <ul>
+                    <li><a href="">social psychology</a></li>
+                    <li><a href="">work, education & career</a></li>
+                    <li><a href="">ed tech & data science</a></li>
+                    <li><a href="youth">youth, culture & society</a></li>
+                    <li><a href="">diversity & inclusion</a></li>
+                    <li><a href="">faith, religion, & spirituality</a></li>
+                </ul>
+            </div>
+    
+            <div class="section tags">
+                <h3 class="subtitle fancy"><span>Tags</span></h3>
+                <div class="category" style="overflow: hidden;">
+                <a href="">#psychology</a>
+                <a href="">#at work</a>
+                <a href="">#ed tech</a>
+                <a href="">#data science</a>
+                <a href="">#diversity</a>
+                <a href="">#career</a>
+                <a href="">#social media</a>
+                <a href="">#religion</a>
+                <a href="">#technology</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <footer id="fh5co-footer" 
+    style= "
+        padding: 3em 0;
+        text-align: center;
+        color: rgb(48, 48, 48);
+        font-size: 18px;
+      ">
+		<p><small>&copy; 2019 Firoze Alam. All Rights Reserverd. <br> Made with <i class="fas fa-heart" style="color: red;" aria-label="love"></i> by Ruckaiya</p>
+	</footer>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script src=" {% static 'js/menu.js' %}"></script>
