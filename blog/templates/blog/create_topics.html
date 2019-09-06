@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'blog/base.html' %}
 {% block title %}
-Create a new post
+
 {% endblock %}
 {% block stylesheet %}
 
@@ -8,13 +8,13 @@ Create a new post
 {% block profile %}
 {% endblock %}
 {% block content %}
-    <div class="container">
-        <form action="" method="POST" enctype="multipart/form-data">
+<div class="container">
+    <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary">Publish</button>
-        </form>
-    </div>
+        <button class="btn btn-primary">Create category</button>
+    </form>
+</div>
 {% endblock %}
 {% block script %}
 

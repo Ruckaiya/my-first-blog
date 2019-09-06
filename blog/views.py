@@ -11,12 +11,12 @@ from django.views import View
 
 # Create your views here.
 class index(View):
-    home = "index.html"
+    home = "blog/index.html"
     def get(self, request):
         return render(request, self.home)
 
 class blog(View):
-    template_name = "blog.html"
+    template_name = "blog/blog.html"
     def get(self, request):
         post = article.objects.all()
         search = request.GET.get('q')
@@ -35,7 +35,7 @@ class blog(View):
         return render(request,self.template_name, context)
 
 class getauthor(View):
-    template = "profile.html"
+    template = "blog/profile.html"
 
     def get(self, request, name):
         post_author = get_object_or_404(User, username=name)
@@ -64,7 +64,7 @@ class getsingle(View):
             "form": form,
             "comment": getComment
         }
-        return render(request, "single.html", context)
+        return render(request, "blog/single.html", context)
 
     def post(self, request, id):
         post = get_object_or_404(article, pk=id)
@@ -83,7 +83,7 @@ def getTopic(request, name):
 
     page = request.GET.get('page')
     total_article = paginator.get_page(page)
-    return render(request, "category.html", {"post": total_article, "cat": cat})
+    return render(request, "blog/category.html", {"post": total_article, "cat": cat})
 
 
 class getLogin(View):
@@ -91,7 +91,7 @@ class getLogin(View):
         if request.user.is_authenticated:
             return redirect('blog:index')
         else:
-            return render(request, "login.html")
+            return render(request, "blog/login.html")
 
     def post(self, request):
         user = request.POST.get('user')
@@ -119,7 +119,7 @@ def getcreate(request):
             instance.article_author = u
             instance.save()
             return redirect('blog:index')
-        return render(request, 'create.html', {"form": form})
+        return render(request, 'blog/create.html', {"form": form})
     else:
         return redirect('blog:login')
 
@@ -135,7 +135,7 @@ def getUpdate(request, pid):
             instance.save()
             messages.success(request, 'Article is updated successfully')
             return redirect('blog:profile')
-        return render(request, 'create.html', {"form": form})
+        return render(request, 'blog/create.html', {"form": form})
     else:
         return redirect('blog:login')
 
@@ -179,12 +179,12 @@ def getRegister(request):
         instance.save()
         messages.success(request, 'Registration successfully completed')
         return redirect('blog:login')
-    return render(request, 'register.html', {"form": form})
+    return render(request, 'blog/register.html', {"form": form})
 
 
 def getCategory(request):
     query = category.objects.all()
-    return render(request, 'topics.html', {"topic": query})
+    return render(request, 'blog/topics.html', {"topic": query})
 
 
 def createTopic(request):

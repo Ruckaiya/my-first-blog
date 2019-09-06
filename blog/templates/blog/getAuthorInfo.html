@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'blog/base.html' %}
 {% block title %}
-
+Create author profile
 {% endblock %}
 {% block stylesheet %}
 
@@ -9,10 +9,10 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary">Create category</button>
+        <button class="btn btn-primary">Create author</button>
     </form>
 </div>
 {% endblock %}
